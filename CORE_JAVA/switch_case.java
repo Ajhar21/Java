@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class switch_case{
     public static void main(String args[]){
         Scanner scan=new Scanner(System.in);
-        System.out.println("Enetr a Number: ");
+        System.out.println("Enter a Number: ");
         int day=scan.nextInt();
         //int day=2;
 
