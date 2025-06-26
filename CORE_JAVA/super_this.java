@@ -1,7 +1,7 @@
 class A extends Object{ //the first level class inherited Object class by default
     public A()  //constructpr
     {
-        super(); //every constructor first execute this method
+        super(); //every constructor first execute this method. no need to write this when no parameter pass
         System.out.println("In A");
     }
     public A(int n){
