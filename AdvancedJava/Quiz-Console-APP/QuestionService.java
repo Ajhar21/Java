@@ -6,11 +6,11 @@ public class QuestionService {
     String[] selections=new String[5];
 
     public QuestionService(){
-        this.questions[0]=new Question(1,"size of int","1", "2", "3", "4", "1");
-        this.questions[1]=new Question(2,"size of double","1", "2", "3", "4", "2");
-        this.questions[2]=new Question(3,"size of char","1", "2", "3", "4", "3");
-        this.questions[3]=new Question(4,"size of long","1", "2", "3", "4", "4");
-        this.questions[4]=new Question(5,"size of boolean","1", "2", "3", "5", "5");
+        this.questions[0]=new Question(1,"size of int","1", "2", "3", "4", "4");
+        this.questions[1]=new Question(2,"size of double","1", "2", "3", "8", "8");
+        this.questions[2]=new Question(3,"size of char","1", "2", "3", "4", "1");
+        this.questions[3]=new Question(4,"size of long","1", "2", "3", "4", "8");
+        this.questions[4]=new Question(5,"size of boolean","1", "2", "3", "5", "1");
 
     }
 
