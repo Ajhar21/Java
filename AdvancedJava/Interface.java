@@ -19,7 +19,7 @@
  * 
  *********************************************************************/
  
- interface A{
+interface A{
 
     int age=28;
     String area="Mymensingh";
