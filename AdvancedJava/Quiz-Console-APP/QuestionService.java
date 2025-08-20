@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class QuestionService {
-    public Question[] questions = new Question[5];
+    public Question[] questions = new Question[5];  //Question
 
     String[] selections=new String[5];
 
