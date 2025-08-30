@@ -1,7 +1,7 @@
 /************************** Custom Exception ******************
  * 
  * Throwable has two class 1. Error 2. Exception
- * Exception -> 1.RunTimeException  2. SQLException     3. IOException
+ * Exception -> 1.RunTimeException(unchecked)  2. SQLException(checked)     3. IOException(checked)
  * RunTimeException is unchecked exception, optional to handle
  * checked exception is compulsory to handle
  * 
