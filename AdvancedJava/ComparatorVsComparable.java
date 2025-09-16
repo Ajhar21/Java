@@ -70,7 +70,7 @@ public class ComparatorVsComparable {
         Comparator <String> comString= (s1,s2) -> s1.length() > s2.length() ? 1 : -1; //sorting based on length of string using lambda expression
 
         List <String> names= new ArrayList<>();
-        names.add("AJhar");
+        names.add("Ajhar");
         names.add("Zebraaa");
         names.add("Apple");
         names.add("Mangoes");
