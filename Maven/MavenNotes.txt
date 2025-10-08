@@ -1,0 +1,46 @@
+/********************* Maven Introduction *******************/
+#Maven is a project management tool
+#Building a project steps ->    1.Compile
+								2.Run
+								3.Test
+								4.Packaging
+								5.Deploying
+Maven helps to all these things, helps on dependencies
+
+#JDBC needs one jar file, but Hibernate needs multiple jar files(Hibernate follows Transitive Dependencies)
+#Transitive Dependencies -> Dependencies of direct dependency. when library depends on multiple jar files
+#Gradle also a similar tool like Maven
+
+
+/********************* Getting Dependencies *******************/
+**Archetype -> Templating tools
+
+**mvnrepository.com -> famous site to download exterbal libraries like mysql connector, hibernate
+
+**pom.xml -> here POM stands for project object model 
+
+every library goes with three things -->>
+GAV -> stands for Group ID, Artifact ID, Version
+
+**Group ID must be unique -> it can be done by reversing domain name(because domain name is always unique) ex. com.FinTechPoint
+**Artifact is the project name/the name of the dependency
+
+/****************** Effective pom ********************************/
+**Effective pom is like the parent pom of pom.xml, it can be called Super pom as well
+**Path to Effective POM -->> right click on pom.xml -> Maven -> Show Effective POM
+**don't make any change in Effective POM as a developer
+
+/********************** Maven Archetype *****************************/
+In Maven, an archetype is basically a project template. 
+It defines a standard project structure and some boilerplate code that you can use as a starting point for your own project.
+There are lot of project template structures available in online from developers, those called Archetype
+
+/********************* How Maven Works ******************************/
+when dependency added it will first search library in local .m2 folder repository. search folder -->> C:\Users\ajhaka\.m2
+If not found, then search it maven central repository from internet.
+
+All libraries aren't safe. that's why company have their own tested repository.
+As employee -->> dependency added -> search local .m2 -> if not found search company repository -> if not found request security team 
+**company repository only contains tested libraries
+
+If anycase library not working but exists in local, best solution is to delete the file from m2 repository
