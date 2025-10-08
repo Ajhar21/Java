@@ -1,0 +1,14 @@
+After downloading the jar file->
+1. import packages
+2. load driver(from jar file)
+3. register driver(JDBC version 3 load & register were compulsory. then it changed from JDBC 4, automitacaly done by adding jar file)
+4. create connection
+5. create statement
+6. execute statement
+7. close
+
+main steps now:
+1. create connection
+2. create statement
+3. execute statement
+4. close
