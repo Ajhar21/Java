@@ -1,0 +1,4 @@
+Postgres driver for JDBC
+
+1. download most used latest jar file
+2. intelliij -> project structure -> library -> add jar file with plus(+) icon
