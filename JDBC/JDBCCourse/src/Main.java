@@ -10,6 +10,8 @@
 
 /*rs.next() shift the pointer to next row. but pointer always point before a row*/
 
+/*executeQuery() for select, execute() for update,delete,create*/
+
 import java.sql.*;
 public class Main{
     public static void main(String[] args)  {
@@ -22,6 +24,9 @@ public class Main{
         ResultSet rs=null;
         String sql="select sname from student where sid=1";
         String sql1="select * from student";
+        String insert="insert into student values(5,'Jhon',46)";    //create
+        String update="update student set sname='Max' where sid=5";    //update
+        String delete="delete from student where sid=5";    //delete
         String name=null;
 
         try {
@@ -42,6 +47,15 @@ public class Main{
                 System.out.print(rs.getString(2)+" ");
                 System.out.println(rs.getInt(3));
             }
+
+//            boolean status= st.execute(insert); //return true when select, but others return false
+//            System.out.println(status);
+
+//            boolean status_update= st.execute(update); //return true when select, but others return false
+//            System.out.println(status_update);
+
+            st.execute(delete); //this also fine, not storing the result
+
 
 
         }
