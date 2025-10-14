@@ -12,6 +12,13 @@
 
 /*executeQuery() for select, execute() for update,delete,create*/
 
+/********************** Problem with Statement *****************
+ * 1. it is difficult to write query string when taking data from user
+ * 2. It can be vulnerable for SQL Injection
+ * 3. Performance issue, can't have caching queries. Always calling DB for every query
+ * ******************************************************************/
+
+
 import java.sql.*;
 public class Main{
     public static void main(String[] args)  {
@@ -28,6 +35,12 @@ public class Main{
         String update="update student set sname='Max' where sid=5";    //update
         String delete="delete from student where sid=5";    //delete
         String name=null;
+
+        /*129: Problem with Statement*/
+        int sid=101;
+        String sname="Max";
+        int marks=57;
+        String sql_input= "insert into student values(" + sid + ", '" + sname + "', " + marks + ")"; //difficult to write
 
         try {
             conn = DriverManager.getConnection(url, uName, pass);   //create connection
@@ -54,7 +67,10 @@ public class Main{
 //            boolean status_update= st.execute(update); //return true when select, but others return false
 //            System.out.println(status_update);
 
-            st.execute(delete); //this also fine, not storing the result
+//            st.execute(delete); //this also fine, not storing the result
+
+
+            st.execute(sql_input);
 
 
 
