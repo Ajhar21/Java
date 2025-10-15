@@ -1,0 +1,8 @@
+ORM-> Object relational Mapping
+Literally take object to store in database.
+Create table according to the blueprint of Object(Class)
+
+Like: every object is a row, class would be the table
+while creating table it use snake casing 
+
+This course using -> 6.6.3
