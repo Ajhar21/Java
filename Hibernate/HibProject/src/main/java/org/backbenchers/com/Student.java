@@ -1,6 +1,15 @@
 package org.backbenchers.com;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+/***************** JPA -> jakarta persistence API *****************
+ * It's standard ORM connectivity
+ *
+ * */
+@Entity
 public class Student {
+    @Id
     private int rollNo;
     private String sName;
     private int sAge;

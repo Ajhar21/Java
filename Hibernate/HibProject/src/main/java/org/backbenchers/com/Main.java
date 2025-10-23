@@ -2,6 +2,7 @@ package org.backbenchers.com;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 /*****************Steps to establish connection*************
@@ -23,13 +24,15 @@ public class Main {
         s.setsAge(27);
 
         Configuration cfg=new Configuration();
+        cfg.addAnnotatedClass(org.backbenchers.com.Student.class);
+        cfg.configure();    //this load the xml file
 //        SessionFactory sf=null; //interface
         SessionFactory sf= cfg.buildSessionFactory();
 //        Session session=null;   //interface
         Session session=sf.openSession();
-
+        Transaction transaction=session.beginTransaction();
         session.persist(s);     //persist used in Hibernate 7+, save was in Hibernate 6
-
+        transaction.commit();
         System.out.println(s);
 
     }
