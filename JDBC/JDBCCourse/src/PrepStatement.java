@@ -1,7 +1,7 @@
 
 /******************* PreparedStatement ********************
  * PreparedStatement is an interface which extends Statement
- * for unknown values in query, it's always better that Statement
+ * for unknown values in query, it's always better than Statement
  *
  * it prevents SQL injection, improve performance
  *
