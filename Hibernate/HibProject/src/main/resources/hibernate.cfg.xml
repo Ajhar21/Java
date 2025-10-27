@@ -6,5 +6,13 @@
         <property name="hibernate.connection.password">DatAEngineeR24</property>
         
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- means Hibernate will automatically align your database tables with your entity classes —
+        adding missing structures but keeping existing data safe. value create will create-->
+        <property name="hibernate.show_sql">true</property>
+        <!-- it will show sql using  Hibernate. default false -->
+        <property name="hibernate.format_sql">true</property>
+        <!-- it will show sql using with format. default false -->
+        <property name="hibernate.sql_dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <!--    not compulsory, but recommended. it's giving instruction which dialect of sql to use    -->
     </session-factory>
 </hibernate-configuration>

@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 
 /***************** JPA -> jakarta persistence API *****************
  * It's standard ORM connectivity
- *
+ * all ORM library try to follow the standard of JPA
  * */
 @Entity
 public class Student {
