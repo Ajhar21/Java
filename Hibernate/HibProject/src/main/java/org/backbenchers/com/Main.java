@@ -20,9 +20,9 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     public static void main(String[] args){
         Student s=new Student();
-        s.setRollNo(20);
-        s.setsName("Lincon");
-        s.setsAge(27);
+        s.setRollNo(21);
+        s.setsName("Rafiq");
+        s.setsAge(29);
 
         Student s2=null;
         /*
@@ -68,20 +68,45 @@ public class Main {
         System.out.println(s);
         System.out.println(s2);
         */
+//
+//        try(Session session=HibernateUtil.getSessionFactory().openSession()){
+//            int insertStudent=CRUD.insertNewStudent(s);
+//            if (insertStudent == GlobalVars.SUCCESS)
+//                System.out.println("Stduent added successfully");
+//            else
+//                System.out.println("Stduent Failed to add");
+//            s2=CRUD.getFetchById(17);
+//        }
+//        catch (NullPointerException n){
+//            System.out.println("Session Error: " + n.getMessage());
+//        }
+//        catch (Exception e){
+//            System.out.println("Unexpected Error: " + e.getMessage());
+////            if(transaction != null) transaction.rollback();
+//        }
 
-        try(Session session=HibernateUtil.getSessionFactory().openSession()){
-            int insertStudent=CRUD.insertNewStudent(s);
-            if (insertStudent == GlobalVars.SUCCESS)
-                System.out.println("Stduent added successfully");
-            else
-                System.out.println("Stduent Failed to add");
-            s2=CRUD.getFetchById(17);
-        }
-        catch (Exception e){
-            System.out.println("Unexpected Error: " + e.getMessage());
-//            if(transaction != null) transaction.rollback();
-        }
+        int insertStudent=CRUD.insertNewStudent(s);
+        if (insertStudent == GlobalVars.SUCCESS)
+            System.out.println("Stduent added successfully");
+        else
+            System.out.println("Stduent Failed to add");
+
+        s2=CRUD.getFetchById(21);
+
+        int updateAge=CRUD.updateStudentAge(17,25);     //update
+        if (updateAge == GlobalVars.SUCCESS)
+            System.out.println("Stduent Age updated successfully");
+        else
+            System.out.println("Stduent age update failed");
         System.out.println("Fetched Data: "+s2);
+        System.out.println("Fetched Data: "+CRUD.getFetchById(17));
+
+        int deleteStudent=CRUD.deleteStudent(14);     //delete a record
+        if (deleteStudent == GlobalVars.SUCCESS)
+            System.out.println("Stduent deleted successfully");
+        else
+            System.out.println("Stduent delete failed");
+
         HibernateUtil.shutdownSession();
 
     }
