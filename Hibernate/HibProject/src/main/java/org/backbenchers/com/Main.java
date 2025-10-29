@@ -6,6 +6,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /*****************Steps to establish connection*************
  * 1. create Configuration object, Configuration is a class
  * 2. create an object of SessionFactory by passing Configuration object
@@ -19,12 +23,13 @@ import org.hibernate.cfg.Configuration;
  * ********************************************/
 public class Main {
     public static void main(String[] args){
+        /*
         Student s=new Student();
         s.setRollNo(22);
         s.setsName("Rabbi");
         s.setsAge(29);
 
-        Student s2=null;
+        Student s2=null; */
         /*
 /*
         *** can be done with one line *******
@@ -84,7 +89,8 @@ public class Main {
 //            System.out.println("Unexpected Error: " + e.getMessage());
 //           if(transaction != null) transaction.rollback();
 //        }
-
+        /************************** Using classes, OOP concept *****************************/
+/*
         HibernateUtil.initializeFactory(Student.class);
 
         int insertStudent=CRUD.insertNewStudent(s);
@@ -113,6 +119,48 @@ public class Main {
 
 //        HibernateUtil.getSession(Student.class);
 
+*/
+        Laptop laptop=new Laptop();
+        laptop.setLid(1);
+        laptop.setName("hp");
+        laptop.setModel("intel core i7");
+        laptop.setRam(16);
+
+        Laptop laptop1=new Laptop();
+        laptop1.setLid(2);
+        laptop1.setName("Dell");
+        laptop1.setModel("intel core i8");
+        laptop1.setRam(32);
+
+        Alien alien=new Alien();
+        alien.setAid(100);
+        alien.setAname("Ajhar");
+        alien.setTech("Java");
+//        alien.setLaptops(new ArrayList<Laptop>(List.of(laptop,laptop1)));
+        alien.setLaptops(Arrays.asList(laptop,laptop1));
+
+        laptop.setAlien(alien);
+        laptop1.setAlien(alien);
+
+        SessionFactory sf=new Configuration()
+                .addAnnotatedClass(org.backbenchers.com.Alien.class)
+                .addAnnotatedClass(org.backbenchers.com.Laptop.class)
+                .configure("hibernate.cfg.xml")     //can go without name for default name
+                .buildSessionFactory();
+
+        Session session=sf.openSession();
+
+        Transaction transaction=session.beginTransaction();
+        session.persist(laptop);    //it should call first, because laptop is parent table
+        session.persist(laptop1);
+        session.persist(alien);
+        transaction.commit();
+
+        session.find(Alien.class, 1);
+        for(Laptop lap : alien.getLaptops()){
+            System.out.println(lap);
+        }
+        sf.close();
 
     }
 }
