@@ -1,12 +1,10 @@
 package org.backbenchers.com;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -132,15 +130,35 @@ public class Main {
         laptop1.setModel("intel core i8");
         laptop1.setRam(32);
 
+        Laptop laptop2=new Laptop();
+        laptop2.setLid(3);
+        laptop2.setName("Macbook");
+        laptop2.setModel("Apple Air");
+        laptop2.setRam(32);
+
         Alien alien=new Alien();
         alien.setAid(100);
         alien.setAname("Ajhar");
         alien.setTech("Java");
+
+        Alien alien1=new Alien();
+        alien1.setAid(101);
+        alien1.setAname("Ashraf");
+        alien1.setTech("Javascript");
+
+        Alien alien2=new Alien();
+        alien2.setAid(102);
+        alien2.setAname("Rafi");
+        alien2.setTech("C#");
+
 //        alien.setLaptops(new ArrayList<Laptop>(List.of(laptop,laptop1)));
         alien.setLaptops(Arrays.asList(laptop,laptop1));
+        alien1.setLaptops(Arrays.asList(laptop,laptop2));
+        alien2.setLaptops(List.of(laptop2));
 
-        laptop.setAlien(alien);
-        laptop1.setAlien(alien);
+        laptop.setAlien(Arrays.asList(alien,alien2));
+        laptop1.setAlien(Arrays.asList(alien1,alien2));
+        laptop2.setAlien(List.of(alien1));
 
         SessionFactory sf=new Configuration()
                 .addAnnotatedClass(org.backbenchers.com.Alien.class)
@@ -151,15 +169,19 @@ public class Main {
         Session session=sf.openSession();
 
         Transaction transaction=session.beginTransaction();
-        session.persist(laptop);    //it should call first, because laptop is parent table
+        session.persist(laptop);    //it should call first, because laptop is parent table for OneToOne
         session.persist(laptop1);
+        session.persist(laptop2);
         session.persist(alien);
+        session.persist(alien1);
+        session.persist(alien2);
+
         transaction.commit();
 
-        session.find(Alien.class, 1);
-        for(Laptop lap : alien.getLaptops()){
-            System.out.println(lap);
-        }
+//        session.find(Alien.class, 1);
+//        for(Laptop lap : alien.getLaptops()){
+//            System.out.println(lap);
+//        }
         sf.close();
 
     }

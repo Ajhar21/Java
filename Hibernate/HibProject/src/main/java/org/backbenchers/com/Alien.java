@@ -28,8 +28,10 @@ public class Alien {
     String tech;
 //    @OneToOne   //this annotation indicate laptop is parent table, has one to one relation with alien table
 //    @OneToMany      //it creates ego issue, it will create a table cause redundancy
-//    @OneToMany(mappedBy = "alien")    //this will prevent to create new table
-    @OneToMany(mappedBy = "lid")  //it will also do the same
+//    @OneToMany(mappedBy = "alien")    //this will prevent to create new table, mapping done by alien from Laptop class
+//    @OneToMany(mappedBy = "lid")  //it will also do the same
+
+    @ManyToMany
     private List<Laptop> laptops;
 
     public List<Laptop> getLaptops(){

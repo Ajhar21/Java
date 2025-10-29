@@ -1,9 +1,8 @@
 package org.backbenchers.com;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 /************** Embeddable ***********************
  * Embeddable annotation used for complex datatype to store in DB
@@ -16,14 +15,16 @@ public class Laptop {
     String name;
     String model;
     int ram;
-    @ManyToOne      //for OneToMany, it would be ManyToOne from laptop perspective
-    private Alien alien;
+//    @ManyToOne      //for OneToMany, it would be ManyToOne from laptop perspective
+//    @ManyToMany //it will create a third table
+    @ManyToMany(mappedBy = "laptops")   //now alien will create third table
+    private List<Alien> alien;
 
-    public Alien getAlien() {
+    public List<Alien> getAlien() {
         return alien;
     }
 
-    public void setAlien(Alien alien) {
+    public void setAlien(List<Alien> alien) {
         this.alien = alien;
     }
 
@@ -66,7 +67,7 @@ public class Laptop {
                 ", name='" + name + '\'' +
                 ", model='" + model + '\'' +
                 ", ram=" + ram +
-                ", alienId=" + (alien != null ? alien.getAid() : "null") +
+//                ", alienId=" + (alien != null ? alien.getAid() : "null") +
                 '}';
     }
 }
