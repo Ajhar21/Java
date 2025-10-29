@@ -22,6 +22,7 @@ import org.hibernate.cfg.Configuration;
 
 public class CRUD {
 
+
     public static Student getFetchById (int id){
         Student s1 = null;
 

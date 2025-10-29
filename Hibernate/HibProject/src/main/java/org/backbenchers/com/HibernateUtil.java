@@ -6,43 +6,52 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-    private static SessionFactory createSessionFactory(){
+    private static SessionFactory sessionFactory;
+
+    //  Create the SessionFactory once, for one or more entity classes
+    private static SessionFactory createSessionFactory(Class<?>... annotatedClasses) {
         try {
-            SessionFactory sf = new Configuration()
-                    .addAnnotatedClass(org.backbenchers.com.Student.class)
-                    .configure("hibernate.cfg.xml")     //load xml configuration file
-                    .buildSessionFactory();
-            return sf;
+            Configuration configuration = new Configuration()
+                    .configure("hibernate.cfg.xml"); // Load hibernate.cfg.xml
+
+            // Dynamically add all annotated entity classes
+            for (Class<?> clazz : annotatedClasses) {
+                configuration.addAnnotatedClass(clazz);
+            }
+
+            return configuration.buildSessionFactory();
+
+        } catch (Throwable t) {
+            System.err.println("Session Factory creation failed: " + t);
+            throw new ExceptionInInitializerError(t);
         }
-        catch (Throwable t){
-            System.out.println("Session Factory creation failed: " +t);
-        }
-        return null;
     }
 
-    // Single, shared SessionFactory for the whole application
-    private static final SessionFactory sessionFactory= createSessionFactory();
+    //  Initialize the SessionFactory (once at application start)
+    public static void initializeFactory(Class<?>... annotatedClasses) {
+        if (sessionFactory == null) {
+            sessionFactory = createSessionFactory(annotatedClasses);
+        }
+    }
 
-    public static SessionFactory getSessionFactory(){
+    //  Get existing SessionFactory
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            throw new IllegalStateException("SessionFactory not initialized! Call initializeFactory() first.");
+        }
         return sessionFactory;
     }
 
-//    private static Session session= sessionFactory.openSession();
-
-    private static Session openSession(){
-        if(sessionFactory != null)
-            return sessionFactory.openSession();
-        else
-            return null;
+    //  Open new session
+    public static Session getSession() {
+        return getSessionFactory().openSession();
     }
 
-    public static Session getSession(){
-        return openSession();
-    }
-
-    public static void shutdownSession(){
-        if (sessionFactory != null) getSessionFactory().close();
-//        if(getSession() != null)    getSession().close();    // should be done manually everytime
-
+    // Close SessionFactory cleanly
+    public static void shutdownSessionFactory() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
+            sessionFactory = null;
+        }
     }
 }

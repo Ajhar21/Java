@@ -20,8 +20,8 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     public static void main(String[] args){
         Student s=new Student();
-        s.setRollNo(21);
-        s.setsName("Rafiq");
+        s.setRollNo(22);
+        s.setsName("Rabbi");
         s.setsAge(29);
 
         Student s2=null;
@@ -82,8 +82,10 @@ public class Main {
 //        }
 //        catch (Exception e){
 //            System.out.println("Unexpected Error: " + e.getMessage());
-////            if(transaction != null) transaction.rollback();
+//           if(transaction != null) transaction.rollback();
 //        }
+
+        HibernateUtil.initializeFactory(Student.class);
 
         int insertStudent=CRUD.insertNewStudent(s);
         if (insertStudent == GlobalVars.SUCCESS)
@@ -93,7 +95,7 @@ public class Main {
 
         s2=CRUD.getFetchById(21);
 
-        int updateAge=CRUD.updateStudentAge(17,25);     //update
+        int updateAge=CRUD.updateStudentAge(17,28);     //update
         if (updateAge == GlobalVars.SUCCESS)
             System.out.println("Stduent Age updated successfully");
         else
@@ -101,13 +103,16 @@ public class Main {
         System.out.println("Fetched Data: "+s2);
         System.out.println("Fetched Data: "+CRUD.getFetchById(17));
 
-        int deleteStudent=CRUD.deleteStudent(14);     //delete a record
+        int deleteStudent=CRUD.deleteStudent(16);     //delete a record
         if (deleteStudent == GlobalVars.SUCCESS)
             System.out.println("Stduent deleted successfully");
         else
             System.out.println("Stduent delete failed");
 
-        HibernateUtil.shutdownSession();
+        HibernateUtil.shutdownSessionFactory();
+
+//        HibernateUtil.getSession(Student.class);
+
 
     }
 }
