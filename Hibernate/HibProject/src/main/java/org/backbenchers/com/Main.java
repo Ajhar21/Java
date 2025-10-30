@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.util.Arrays;
 import java.util.List;
@@ -119,11 +120,11 @@ public class Main {
 
 */
         Laptop laptop=new Laptop();
-        laptop.setLid(1);
-        laptop.setName("hp");
-        laptop.setModel("intel core i7");
-        laptop.setRam(16);
-
+        laptop.setLid(5);
+        laptop.setName("asus");
+        laptop.setModel("medel 6");
+        laptop.setRam(32);
+/*
         Laptop laptop1=new Laptop();
         laptop1.setLid(2);
         laptop1.setName("Dell");
@@ -145,6 +146,8 @@ public class Main {
         alien1.setAid(101);
         alien1.setAname("Ashraf");
         alien1.setTech("Javascript");
+      */
+
 /*
         Alien alien2=new Alien();
         alien2.setAid(102);
@@ -152,16 +155,16 @@ public class Main {
         alien2.setTech("C#");
 */
 //        alien.setLaptops(new ArrayList<Laptop>(List.of(laptop,laptop1)));
-        alien.setLaptops(Arrays.asList(laptop,laptop1));
+//        alien.setLaptops(Arrays.asList(laptop,laptop1));
 //        alien1.setLaptops(Arrays.asList(laptop,laptop2));
-        alien1.setLaptops(List.of(laptop2));
+//        alien1.setLaptops(List.of(laptop2));
 /*
         laptop.setAlien(Arrays.asList(alien,alien2));
         laptop1.setAlien(Arrays.asList(alien1,alien2));
         laptop2.setAlien(List.of(alien1));
 */
         SessionFactory sf=new Configuration()
-                .addAnnotatedClass(org.backbenchers.com.Alien.class)
+//                .addAnnotatedClass(org.backbenchers.com.Alien.class)
                 .addAnnotatedClass(org.backbenchers.com.Laptop.class)
                 .configure("hibernate.cfg.xml")     //can go without name for default name
                 .buildSessionFactory();
@@ -170,24 +173,38 @@ public class Main {
 
         Transaction transaction=session.beginTransaction();
         session.persist(laptop);    //it should call first, because laptop is parent table for OneToOne
+        /*
         session.persist(laptop1);
         session.persist(laptop2);
         session.persist(alien);
-        session.persist(alien1);
+        session.persist(alien1); */
 //        session.persist(alien2);
 
         transaction.commit();
-        session.find(Alien.class,100);      //same session use cache, don't fire select query
-        System.out.println(alien);
+//        session.find(Alien.class,100);      //same session use cache, don't fire select query
+//        System.out.println(alien);
 
-        Session session1=sf.openSession();
-        session1.find(Alien.class,100);      //different session fire query
+//        Session session1=sf.openSession();
+//        session1.find(Alien.class,100);      //different session fire query
 //        System.out.println("Different session fire query:"+alien);
 
 //        session.find(Alien.class, 1);
 //        for(Laptop lap : alien.getLaptops()){
 //            System.out.println(lap);
 //        }
+
+        /************************* HQL - Hibernate Query Language ***********************
+         * SQL work with table & column, HQL work with Entity(Class) & Attributes
+         * HQL is object-oriented, while SQL is table-oriented.
+         * Native Query is pure SQL query
+         * SQL -> select * from laptop where ram=32
+         * HQL -> from Laptop where ram=32
+         * ********************************************************************************/
+
+        Query query=session.createQuery("from Laptop where ram =32", Laptop.class);
+        List<Laptop> laptops=query.getResultList();
+        System.out.println(laptops);
+        session.close();
         sf.close();
 
     }
