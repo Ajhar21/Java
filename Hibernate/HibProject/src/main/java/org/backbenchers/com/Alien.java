@@ -16,6 +16,24 @@ import java.util.List;
  * The mappedBy value must match the name of the variable in the child entity (Laptop)
  * that refers back to the parent (Alien).
  * ******************************************************************************/
+
+/******************** Cache, EAGER Fetch, LAZY Fetch ****************************
+ * Hibernate by default give Level 1 caching, caching for same session for same data
+ * Level 1 caching-> won't ask select query in same session
+ * will ask query in different session
+ * LAZY fetch won't make join query unless object needed to be print
+ * EAGER fetch always make join query
+ * **********************************************************************************/
+
+/************************* Caching ******************************
+ * Same data request to server within same session, Hibernate won't call DB for next time.
+ * Hibernate returns data from cache
+ * Hibernate doesn't provide caching for different sessions
+ * Have to use external library Jcache(EHCACHE, Ceffeine) for caching between defferent sessions
+ * *****************************************************************/
+
+
+
 //@Entity(name="alien_table")
 @Entity
 @Table(name="alien_table")
@@ -31,7 +49,8 @@ public class Alien {
 //    @OneToMany(mappedBy = "alien")    //this will prevent to create new table, mapping done by alien from Laptop class
 //    @OneToMany(mappedBy = "lid")  //it will also do the same
 
-    @ManyToMany
+//    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)   //by default it is  (fetch = FetchType.LAZY)
     private List<Laptop> laptops;
 
     public List<Laptop> getLaptops(){
