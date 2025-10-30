@@ -145,21 +145,21 @@ public class Main {
         alien1.setAid(101);
         alien1.setAname("Ashraf");
         alien1.setTech("Javascript");
-
+/*
         Alien alien2=new Alien();
         alien2.setAid(102);
         alien2.setAname("Rafi");
         alien2.setTech("C#");
-
+*/
 //        alien.setLaptops(new ArrayList<Laptop>(List.of(laptop,laptop1)));
         alien.setLaptops(Arrays.asList(laptop,laptop1));
-        alien1.setLaptops(Arrays.asList(laptop,laptop2));
-        alien2.setLaptops(List.of(laptop2));
-
+//        alien1.setLaptops(Arrays.asList(laptop,laptop2));
+        alien1.setLaptops(List.of(laptop2));
+/*
         laptop.setAlien(Arrays.asList(alien,alien2));
         laptop1.setAlien(Arrays.asList(alien1,alien2));
         laptop2.setAlien(List.of(alien1));
-
+*/
         SessionFactory sf=new Configuration()
                 .addAnnotatedClass(org.backbenchers.com.Alien.class)
                 .addAnnotatedClass(org.backbenchers.com.Laptop.class)
@@ -174,9 +174,15 @@ public class Main {
         session.persist(laptop2);
         session.persist(alien);
         session.persist(alien1);
-        session.persist(alien2);
+//        session.persist(alien2);
 
         transaction.commit();
+        session.find(Alien.class,100);      //same session use cache, don't fire select query
+        System.out.println(alien);
+
+        Session session1=sf.openSession();
+        session1.find(Alien.class,100);      //different session fire query
+//        System.out.println("Different session fire query:"+alien);
 
 //        session.find(Alien.class, 1);
 //        for(Laptop lap : alien.getLaptops()){

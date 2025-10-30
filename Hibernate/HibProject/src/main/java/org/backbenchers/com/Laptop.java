@@ -15,9 +15,10 @@ public class Laptop {
     String name;
     String model;
     int ram;
+    /*
 //    @ManyToOne      //for OneToMany, it would be ManyToOne from laptop perspective
 //    @ManyToMany //it will create a third table
-    @ManyToMany(mappedBy = "laptops")   //now alien will create third table
+//    @ManyToMany(mappedBy = "laptops")   //now alien will create third table
     private List<Alien> alien;
 
     public List<Alien> getAlien() {
@@ -27,7 +28,7 @@ public class Laptop {
     public void setAlien(List<Alien> alien) {
         this.alien = alien;
     }
-
+*/
     public int getLid() {
         return lid;
     }
