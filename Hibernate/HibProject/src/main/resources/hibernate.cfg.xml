@@ -5,7 +5,7 @@
         <property name="hibernate.connection.user">postgres</property>
         <property name="hibernate.connection.password">DatAEngineeR24</property>
         
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- means Hibernate will automatically align your database tables with your entity classes —
         adding missing structures but keeping existing data safe. value create will create table each time
         & drop table if exists-->
