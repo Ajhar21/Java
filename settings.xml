@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <localRepository>C:\Users\Ajhar Akanda\.m2\repository</localRepository>
+
+  <mirrors>
+    <mirror>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+    <mirror>
+      <id>jboss-public</id>
+      <name>JBoss Public Repository</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+    <mirror>
+      <id>maven2-glassfish-repo</id>
+      <name>Glassfish Repository</name>
+      <url>https://maven.java.net/content/groups/public/</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+
+</settings>

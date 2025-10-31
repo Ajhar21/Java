@@ -248,9 +248,12 @@ public class Main {
 //        System.out.println("getReference: "+ lRef);
 //        System.out.println("find: "+ lFind);
 
-        /*********************** EHCACHE **************************/
+        /*********************** EHCACHE *************************
         /* same session same query, Hibernate provide default cache -> Level 1 caching
         * different session same query, Hibernate won't provide cache, EHCACHE can handle it -> Level 2 Caching
+        * @Cacheable -> Level 2 caching annotation, have to add to Entity to make Entity Level 2 cacheable
+         * EHCACHE dependency injection has been solved by adding settings.xml file in below directory:
+         * C:\Users\Ajhar Akanda\.m2
         * *********************************************************************/
         System.out.println("CACHING");
         Laptop lapCache1=session.find(Laptop.class, 2);

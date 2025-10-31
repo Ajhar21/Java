@@ -9,6 +9,7 @@ import java.util.List;
  * */
 //@Embeddable
 @Entity
+@Cacheable      //Level 2 caching annotation, have to add this here to make this Entity Level 2 cacheable
 public class Laptop {
     @Id
     int lid;

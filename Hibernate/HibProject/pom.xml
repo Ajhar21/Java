@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,40 +17,47 @@
     </properties>
 
     <dependencies>
-        <!-- ✅ JAXB API (needed for Java 11+) -->
-            <!-- JAXB API -->
-            <dependency>
-                <groupId>jakarta.xml.bind</groupId>
-                <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>2.3.3</version>
-            </dependency>
 
-            <!-- JAXB Runtime (for Java 11+) -->
-            <dependency>
-                <groupId>org.glassfish.jaxb</groupId>
-                <artifactId>jaxb-runtime</artifactId>
-                <version>2.3.3</version>
-            </dependency>
+        <!--  Jakarta JAXB (modern API) -->
+<!--        <dependency>-->
+<!--            <groupId>jakarta.xml.bind</groupId>-->
+<!--            <artifactId>jakarta.xml.bind-api</artifactId>-->
+<!--            <version>4.0.2</version>-->
+<!--        </dependency>-->
 
-        <!-- ✅ PostgreSQL Driver -->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jaxb</groupId>-->
+<!--            <artifactId>jaxb-runtime</artifactId>-->
+<!--            <version>4.0.2</version>-->
+<!--        </dependency>-->
+
+        <!--  Legacy JAXB for backward compatibility -->
+<!--        <dependency>-->
+<!--            <groupId>javax.xml.bind</groupId>-->
+<!--            <artifactId>jaxb-api</artifactId>-->
+<!--            <version>2.3.1</version>-->
+<!--        </dependency>-->
+
+        <!-- PostgreSQL Driver -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.7</version>
         </dependency>
 
-        <!-- ✅ Hibernate Core -->
+        <!--  Hibernate Core -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>7.1.3.Final</version>
         </dependency>
 
-        <!-- ✅ Hibernate Cache (JCache + Ehcache) -->
+        <!-- Hibernate Cache (JCache + Ehcache) -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-jcache</artifactId>
             <version>7.1.3.Final</version>
+            <!-- Must follow same version as Hibernate above  -->
         </dependency>
 
         <dependency>
@@ -57,13 +65,21 @@
             <artifactId>ehcache</artifactId>
             <version>3.10.8</version>
         </dependency>
+
+<!--        &lt;!&ndash; Explicit FastInfoset dependency to avoid old HTTP repo &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.sun.xml.fastinfoset</groupId>-->
+<!--            <artifactId>FastInfoset</artifactId>-->
+<!--            <version>1.2.16</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo1.maven.org/maven2/</url>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>central</id>-->
+<!--            <url>https://repo1.maven.org/maven2/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
 </project>
