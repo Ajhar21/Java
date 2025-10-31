@@ -20,6 +20,21 @@ import java.util.List;
  * Configuration should be done once in an application
  * Session create one session
  * ********************************************/
+
+/******************  Fetching with filter & specific properties ******************
+ * Query query=session.createQuery("from Laptop where name like ?1 and ram= ?2", Laptop.class);
+ * query.setParameter(1,lap_brand);
+ *  query.setParameter(2,ram);  -> have to pass parameter by serial
+ *
+ *  Fetching multiple properties will return an Object array
+ *  Query query=session.createQuery("select model,id from Laptop where name like ?1");  -> will return Object array
+ * ************************************************************************************/
+
+/************************** find() vs getReference() or load()-> deprecated *************
+ * find() is by default EAGER fetching, it will run query even when the result won't use
+ * getReference() or laod() is by default LAZY fetching, it won't run query when the result won't use
+ * *************************************************************************************/
+
 public class Main {
     public static void main(String[] args){
         /*
@@ -119,11 +134,14 @@ public class Main {
 //        HibernateUtil.getSession(Student.class);
 
 */
+        /*
         Laptop laptop=new Laptop();
         laptop.setLid(5);
-        laptop.setName("asus");
-        laptop.setModel("medel 6");
+        laptop.setName("hp");
+        laptop.setModel("Silent Book");
         laptop.setRam(32);
+    */
+
 /*
         Laptop laptop1=new Laptop();
         laptop1.setLid(2);
@@ -172,7 +190,7 @@ public class Main {
         Session session=sf.openSession();
 
         Transaction transaction=session.beginTransaction();
-        session.persist(laptop);    //it should call first, because laptop is parent table for OneToOne
+//        session.persist(laptop);    //it should call first, because laptop is parent table for OneToOne
         /*
         session.persist(laptop1);
         session.persist(laptop2);
@@ -201,9 +219,49 @@ public class Main {
          * HQL -> from Laptop where ram=32
          * ********************************************************************************/
 
-        Query query=session.createQuery("from Laptop where ram =32", Laptop.class);
-        List<Laptop> laptops=query.getResultList();
-        System.out.println(laptops);
+        String lap_brand="hp";
+        int ram=32;
+
+//        Query query=session.createQuery("from Laptop where ram =32", Laptop.class);
+//        Query query=session.createQuery("from Laptop where name like 'hp'", Laptop.class);
+//        Query query=session.createQuery("from Laptop where name like ?1 and ram= ?2", Laptop.class);
+//        Query query=session.createQuery("select model from Laptop where name like ?1 and ram= ?2"); //can't pass class here
+        Query query=session.createQuery("select model,id from Laptop where name like ?1"); //can't pass class here
+        query.setParameter(1,lap_brand);
+//        query.setParameter(2,ram);
+//        List<Laptop> laptops=query.getResultList();
+//        List<String> models=query.getResultList();
+
+        List<Object[]> laptops=query.getResultList();
+
+//        System.out.println(laptops);
+//        System.out.println(models);
+
+        for(Object[] data : laptops){
+            System.out.println((String)data[0] + " " + (int)data[1] );
+        }
+
+        Laptop lRef=session.getReference(Laptop.class, 1); //it's LAZY fetching
+//        session.load(2, "hp");  //it's also lazy fetching but method deprecated in 7+
+        Laptop lFind=session.find(Laptop.class, 3); //it's EAGER fetching
+
+//        System.out.println("getReference: "+ lRef);
+//        System.out.println("find: "+ lFind);
+
+        /*********************** EHCACHE **************************/
+        /* same session same query, Hibernate provide default cache -> Level 1 caching
+        * different session same query, Hibernate won't provide cache, EHCACHE can handle it -> Level 2 Caching
+        * *********************************************************************/
+        System.out.println("CACHING");
+        Laptop lapCache1=session.find(Laptop.class, 2);
+        System.out.println("Cache chech:"+ lapCache1);
+        Laptop lapCache2=session.find(Laptop.class, 2);     //Level 1 caching will work here
+        System.out.println("Cache chech:"+ lapCache2);
+
+        Session session2=sf.openSession();
+        Laptop lapCache3=session2.find(Laptop.class, 2);     //different session, Level 1 caching won't work here
+        System.out.println("Cache chech:"+ lapCache3);
+
         session.close();
         sf.close();
 
