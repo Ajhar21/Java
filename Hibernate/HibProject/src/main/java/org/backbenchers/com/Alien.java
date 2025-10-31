@@ -33,7 +33,6 @@ import java.util.List;
  * *****************************************************************/
 
 
-
 //@Entity(name="alien_table")
 @Entity
 @Table(name="alien_table")
