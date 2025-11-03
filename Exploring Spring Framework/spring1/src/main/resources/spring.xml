@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+<!--    <bean id="alien" class="org.bih.Alien"  scope="singleton">-->
+    <bean id="alien" class="org.bih.Alien"  scope="prototype">
+        <property name="age" value="21"></property>
+
+<!--    </bean>-->
+<!--    <bean id="alien1" class="org.bih.Alien">-->
+
+    </bean>
+
+    <bean id="lap" class="org.bih.Laptop">
+
+    </bean>
+
+</beans>
