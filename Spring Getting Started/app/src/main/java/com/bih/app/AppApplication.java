@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 /******************************* Spring getting started ***********************
  * from main we can access ApplicationContext, but from other files it's not possible
  * use @Autowired top of object, it will configure the object by Spring IoC
+ * bean is object managed by spring
  * ******************************************************************************/
 
 @SpringBootApplication
