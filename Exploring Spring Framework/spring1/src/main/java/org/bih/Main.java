@@ -38,6 +38,37 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * it can be achieved by adding property tag in xml under bean e.x: <property name="age" value="21"></property>
  * ***************************************************************************/
 
+/************************ v-168 Reference attribute Injection ***************************
+ * Reference setter can be injected by ref attribute
+ * primitive variable-> name="age" value="21"
+ * reference variable -> name="age" ref="21"
+ * it can be achieved by adding property tag in xml under bean e.x: <property name="lap" ref="lap1"></property>
+ * but lap1 bean must be injected in xml file
+ * ***************************************************************************/
+
+/************************ v-169 Constructor Injection ***************************
+ * ref, value concept also work here
+ *
+ *<constructor-arg value="21"/>     ->close tag when there is no body
+ *         <constructor-arg ref="lap1"/>    -> it will work with default sequence
+ *
+ * <constructor-arg type="int" value="21"/>    -> it will work with type
+ *         <constructor-arg type="org.bih.Laptop" ref="lap1"/>  -> work with type
+ *
+ * <constructor-arg index="2" ref="lap1"/>
+ *         <constructor-arg index="0" value="21"/>
+ *         <constructor-arg index="1" value="10000"/>   -> work with index
+ * ****index is the ideal way for constructor injection***
+ *
+ *<constructor-arg name="lap" ref="lap1"/>
+ *         <constructor-arg name="salary" value="10000"/>
+ *         <constructor-arg name="age" value="21"/>     -> have to use @ConstructorProperties({"age","salary","lap"})
+ *         on constructor
+ *
+ * when parameter are mandatory use @ConstructorProperties in constructor & name in xml
+ * when parameter are optionals use index in xml
+ * ***************************************************************************/
+
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context= new ClassPathXmlApplicationContext("spring.xml");   //have to pass file name
@@ -47,6 +78,7 @@ public class Main {
 //        obj.setAge(21);
         System.out.println(obj.getAge());
         obj.code();
+        System.out.println(obj.getSalary());
 
 //        Alien obj1=(Alien) context.getBean("alien"); //by typecasting Alien
 //        System.out.println(obj1.age);
