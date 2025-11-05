@@ -4,11 +4,14 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-
+<!--    <bean id="alien" class="org.bih.Alien">-->
 <!--    <bean id="alien" class="org.bih.Alien"  scope="singleton">-->
-    <bean id="alien" class="org.bih.Alien"  scope="prototype">
+<!--    <bean id="alien" class="org.bih.Alien"  scope="prototype">-->
+<!--        <bean id="alien" class="org.bih.Alien" autowire="byName">-->
+        <bean id="alien" class="org.bih.Alien" autowire="byType">
 <!--        <property name="age" value="21"></property>-->
 <!--        <property name="lap" ref="lap1"></property>-->
+<!--        <property name="salary" value="10000"></property>-->
 
 <!--        <constructor-arg value="21"/>-->
 <!--        <constructor-arg ref="lap1"/>-->
@@ -17,14 +20,18 @@
 <!--        <constructor-arg type="int" value="10000"/>-->
 <!--        <constructor-arg type="int" value="21"/>-->
 
-        <constructor-arg name="lap" ref="lap1"/>
-        <constructor-arg name="salary" value="10000"/>
-        <constructor-arg name="age" value="21"/>
+<!--        <constructor-arg name="lap" ref="lap1"/>-->
+<!--        <constructor-arg name="salary" value="10000"/>-->
+<!--        <constructor-arg name="age" value="21"/>-->
 
 
 <!--        <constructor-arg index="2" ref="lap1"/>-->
 <!--        <constructor-arg index="0" value="21"/>-->
 <!--        <constructor-arg index="1" value="10000"/>-->
+
+        <property name="age" value="21"/>
+<!--        <property name="com" ref="com"/>-->
+        <property name="salary" value="10000"/>
 
 
 <!--    </bean>-->
@@ -32,8 +39,8 @@
 
     </bean>
 
-    <bean id="lap1" class="org.bih.Laptop">
-
-    </bean>
+<!--    <bean id="lap1" class="org.bih.Laptop">-->
+    <bean id="com1" class="org.bih.Laptop" primary="true"/>
+    <bean id="com" class="org.bih.Desktop"/>
 
 </beans>

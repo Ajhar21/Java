@@ -69,6 +69,21 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * when parameter are optionals use index in xml
  * ***************************************************************************/
 
+/************************ v-171 Autowiring ***************************
+ *autowiring -> not mentioning property under bean, but it will get the property from desired bean byName or byType
+ * autowiring byName -> <bean id="alien" class="org.bih.Alien" autowire="byName">
+ * autowiring byType -> <bean id="alien" class="org.bih.Alien" autowire="byType">
+ * **autowiring won't work when property injected explicitly under bean**
+ * ***************************************************************************/
+
+/************************ v-172 primary bean ***************************
+ * <bean id="com1" class="org.bih.Laptop" primary="true"/>
+ * when autowiring byType & there are multiple beans with same type, then primary bean being called
+ * but for explicit mention of property, autowiring concept never woks, always go for explicit one
+ ****************************************************************************/
+
+
+
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context= new ClassPathXmlApplicationContext("spring.xml");   //have to pass file name
