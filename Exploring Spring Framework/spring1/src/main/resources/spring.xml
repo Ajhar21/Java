@@ -30,7 +30,11 @@
 <!--        <constructor-arg index="1" value="10000"/>-->
 
         <property name="age" value="21"/>
-<!--        <property name="com" ref="com"/>-->
+
+        <property name="com">
+            <bean class="org.bih.Laptop"/>  <!-- it's inner bean -->
+        </property>
+
         <property name="salary" value="10000"/>
 
 
@@ -41,6 +45,7 @@
 
 <!--    <bean id="lap1" class="org.bih.Laptop">-->
     <bean id="com1" class="org.bih.Laptop" primary="true"/>
-    <bean id="com" class="org.bih.Desktop"/>
+<!--    <bean class="org.bih.Laptop"/>-->
+    <bean id="com" class="org.bih.Desktop" lazy-init="true"/>
 
 </beans>

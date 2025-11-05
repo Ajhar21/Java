@@ -79,9 +79,30 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /************************ v-172 primary bean ***************************
  * <bean id="com1" class="org.bih.Laptop" primary="true"/>
  * when autowiring byType & there are multiple beans with same type, then primary bean being called
- * but for explicit mention of property, autowiring concept never woks, always go for explicit one
+ * but for explicit mention of property, autowiring concept never works, always go for explicit one
  ****************************************************************************/
 
+/************************ v-173 Lazy Init Bean ***************************
+ * Object will be created only when it is needed is called lazy init bean
+ * implementation: <bean id="com" class="org.bih.Desktop" lazy-init="true"/>
+ * now Desktop type bean won't be created by default. If we want to create, we will need explicit creation by getBean
+ * if Eager/non-lazy object has dependency on lazy object, then lazy bean will be created when container loading
+ ****************************************************************************/
+
+/************************ v-174 Get Bean by Type ***************************
+ * by passing bean name, class type won't need any type casting
+ * by passing only class type, there must be autowiring byType in xml file
+ * by passing only class type, no need any id name in xml for bean ex:<bean class="org.bih.Laptop"/>
+ ***************************************************************************/
+
+/************************ v-175 inner beans ***************************
+ * injecting bean inside bean named property body
+ * inner bean will be only available for outer bean. entire application can't use it
+ * xml configuration:
+ *<property name="com">
+ *             <bean class="org.bih.Laptop"/>
+ *</property>
+ ***************************************************************************/
 
 
 public class Main {
@@ -95,8 +116,12 @@ public class Main {
         obj.code();
         System.out.println(obj.getSalary());
 
-//        Alien obj1=(Alien) context.getBean("alien"); //by typecasting Alien
+//        Alien obj1=(Alien) context.getBean("alien");
 //        System.out.println(obj1.age);
 //        obj1.code();
+
+        Desktop desktop=context.getBean("com", Desktop.class);   //explicitly creating lazy init bean
+        /********* by passing bean name, class type won't need any type casting **************/
+        Computer computer=context.getBean(Computer.class);
         }
 }
