@@ -32,11 +32,14 @@ import java.util.ArrayList;
  * pass dependency bean by constructor  e.x:public Alien alien( Computer com)
  * *******************************************************************************/
 
-/************************** v-190 Primary & Qualifier ****************************
+/************************** v-180 Primary & Qualifier ****************************
  * when there are multiple Beans available, we have to explicitly which one to use
  * the annotation @Primary will make bean primary
- *
+ * the annotation @Qualifier passes through Bean constructor work like reference to that bean
+ * like ref attribute in xml e.x: in config -> public Alien alien(@Qualifier("desktop") Computer com)
  * *******************************************************************************/
+
+/*********************** tight coupling vs loose coupling ************************/
 
 
 public class Main {
