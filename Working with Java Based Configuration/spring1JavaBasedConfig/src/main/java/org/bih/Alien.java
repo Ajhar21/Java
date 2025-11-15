@@ -1,13 +1,22 @@
 package org.bih;
 
-//import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.beans.ConstructorProperties;
 
-//@Component
+@Component
 public class Alien {
+
+    @Value("21")
     private int age;
     private int salary=5000;
+
+//    @Autowired    //Field Injection
+//    @Qualifier("lap")
     private Computer com;
     public Alien(){
         System.out.println("Alien object created");
@@ -42,6 +51,8 @@ public class Alien {
         return com;
     }
 
+    @Autowired      //setter injection
+    @Qualifier("lap")
     public void setCom(Computer com) {
         this.com = com;
     }

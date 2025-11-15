@@ -1,5 +1,8 @@
 package org.bih;
 
+import org.springframework.stereotype.Component;
+
+@Component("lap")
 public class Laptop implements Computer {
     public Laptop(){
         System.out.println("Laptop object created");
