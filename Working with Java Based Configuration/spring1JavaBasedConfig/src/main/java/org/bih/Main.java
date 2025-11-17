@@ -28,19 +28,45 @@ import java.util.ArrayList;
 
 /************************** v-179 Autowire ****************************
  * coupling between objects
- * tight coupling is directly mention implementation class, not interface
+ * tight coupling is directly mention implementation/concrete class, not interface
+ * loose coupling is mentioning interface type
  * pass dependency bean by constructor  e.x:public Alien alien( Computer com)
  * *******************************************************************************/
 
 /************************** v-180 Primary & Qualifier ****************************
- * when there are multiple Beans available, we have to explicitly which one to use
+ * when there are multiple Beans available, we have to explicitly mention which one to use
  * the annotation @Primary will make bean primary
  * the annotation @Qualifier passes through Bean constructor work like reference to that bean
  * like ref attribute in xml e.x: in config -> public Alien alien(@Qualifier("desktop") Computer com)
  * *******************************************************************************/
 
+/************************** v-181 Component Stereotype Annotation ****************************
+ * annotation @Component  used on top of class to make the all beans of class managed by spring
+ * annotation @ComponentScan used top of config class to instruct spring to scan all classes under @Component
+ * has to mention base package of classes inside @ComponentScan. e.x: @ComponentScan("org.bih")
+ * it will scan all classes under @Component
+ * *******************************************************************************/
+
 /*********************** tight coupling vs loose coupling ************************/
 
+/************************** v-182 Autowire Field, Constructor, Setter ****************************
+ * annotation @Autowired automatically inject bean
+ * annotation @Qualifier("desktop") straight mention bean to be wired
+ * default name of bean is lowercase class name
+ * can also explicitly mention bean name by @Component("lap")
+ * There are three types of injection: 1. Field Injection, 2. Constructor Injection, 3. Setter Injection
+ * Setter Injection is the best approach
+ * *******************************************************************************/
+
+/************************** v-183 Component Stereotype Annotation ****************************
+ * annotation @Primary make bean as primary
+ * but @Qualifier gets priority over Primary
+ * *******************************************************************************/
+
+/************************** v-184 Scope & Value Annotation ****************************
+ * annotation @Scope top of class used for scoping
+ * annotation @Value is used to set default value of an attribute
+ * *******************************************************************************/
 
 public class Main {
     public static void main(String[] args) {
@@ -57,6 +83,7 @@ public class Main {
 //        al.setAge(25);
         System.out.println(al.getAge());
         al.code();
+        Alien al1 = context.getBean(Alien.class);
 
     }
 }

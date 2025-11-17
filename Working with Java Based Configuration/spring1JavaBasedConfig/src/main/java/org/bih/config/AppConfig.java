@@ -6,36 +6,34 @@ import org.bih.Desktop;
 import org.bih.Laptop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 @Configuration
+@ComponentScan("org.bih")
 public class AppConfig {
-
-    @Bean
-//    public Alien alien(@Autowired Computer com){
-//    public Alien alien(@Qualifier("desktop") Computer com){  //new version no need to mention Autowired
-    public Alien alien(Computer com){
-        Alien alien=new Alien();
-        alien.setAge(26);
-//        alien.setCom(desktop());    //tight coupling
-        alien.setCom(com);
-        return alien;
-    }
-
-    @Bean
-//    @Bean(name = "com") //single bean name, better to use it
-//    @Bean(name = {"com1","Weapon","Desktop"})   //multiple bean name
-//    @Scope(value = "prototype")
-    public Desktop desktop(){
-        return new Desktop();
-    }
-
-    @Bean
-    @Primary
-    public Laptop laptop(){
-        return new Laptop();
-    }
+//
+//    @Bean
+////    public Alien alien(@Autowired Computer com){
+////    public Alien alien(@Qualifier("desktop") Computer com){  //new version no need to mention Autowired
+//    public Alien alien(Computer com){
+//        Alien alien=new Alien();
+//        alien.setAge(26);
+////        alien.setCom(desktop());    //tight coupling
+//        alien.setCom(com);
+//        return alien;
+//    }
+//
+//    @Bean
+////    @Bean(name = "com") //single bean name, better to use it
+////    @Bean(name = {"com1","Weapon","Desktop"})   //multiple bean name
+////    @Scope(value = "prototype")
+//    public Desktop desktop(){
+//        return new Desktop();
+//    }
+//
+//    @Bean
+//    @Primary
+//    public Laptop laptop(){
+//        return new Laptop();
+//    }
 }
