@@ -1,0 +1,12 @@
+************* Spring MVC notes ***************
+
+View technologies
+JSP -> Jakarta Server Pages(Formerly Java Server Pages)
+
+MVC ->Model, View, Controller
+here Servlet works as controller,
+JSP works as View,
+POJO(Plain Old Java Object) works as Model
+***behind the scene, JSP gets converted to servlet. Tomcat works as servlet container.
+
+Client-> Controller(Servlet) -> Model(POJO) -> View(JSP) -> Client
