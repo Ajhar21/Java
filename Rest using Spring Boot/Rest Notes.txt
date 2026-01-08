@@ -1,0 +1,52 @@
+***************************** REST *****************************
+
+V-234 what is REST
+* REST stands for representational state transfer
+* State -> transfering current state between client & server. ex:current employeer
+* REST API -> used for transferring state. two famous way of communication between client-server. 1. JSON 2. XML
+* JSON -> Stands for Javascript Object Notation, takes less memory. Easier to understand
+* every request to server is stateless
+*** for API url we don't use verb, use noun
+
+V-235 Http Methods
+* GET,POST,PUT,DELETE are Http methods
+* GetMapping,PostMapping,PutMapping,DeleteMapping are springboot annotations for mapping request
+
+V-236 Understanding React UI
+* read the Understanding React UI for understanding configuration
+
+V-237 Working with Postman
+
+V-238 Creating a Rest Controller
+
+V-239 Connecting React and Spring
+* use annotation with attribute in controller under @RestController-> @CrossOrigin(origins = "http://localhost:3000")
+->here http://localhost:3000 is the React frontend
+* add api url http://localhost:8080/api/job/posts in Search method of file Search.jsx
+
+V-240 Path Variable
+* Example
+@GetMapping("/jobPost/{jobId}")
+public JobPost getJob(@PathVariable("jobId") int jobId){
+	return service.getJob(jobId);
+}
+
+V-241 Sending Data and RequestBody
+* public JobPost addJobPost(@RequestBody JobPost jobPost, here request body annotoation used to send request client from server
+
+V-242 Put and Delete Mapping
+* @PutMapping("/jobPost")
+    public JobPost updateJob(@RequestBody JobPost jobPost)
+* @DeleteMapping("/jobPost/{jobId}")
+    public String deleteJob(@PathVariable("jobId") int jobId)
+
+V-243 Content Negotiation
+* jackson library is responsible for converting json or xml to java object(deserialization)
+* jackson by dafault work with json, spring boot by default have this library
+* from mvnrepository needs to inject dependency for xml, must me same version as project jackson version
+* we can negotiate content in method level for each rest request
+* key: Accept Value:application/xml	for accepting xml in get
+* key: Content-Type Value:application/json for sending json data to server(post,put,delete)
+* key: Content-Type Value:application/xml for sending xml data to server(post,put,delete)
+* @GetMapping(path="/jobPosts",produces = "application/xml") produces only xml format to client
+* @PostMapping(path="/jobPost",consumes="application/json")   only consume json format
